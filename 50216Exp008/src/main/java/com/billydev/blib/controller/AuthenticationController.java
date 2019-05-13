@@ -18,7 +18,7 @@ import com.billydev.blib.model.AuthToken;
 import com.billydev.blib.model.LoginUser;
 import com.billydev.blib.model.User;
 import com.billydev.blib.model.WrapOfListDTApplInfo;
-import com.billydev.blib.service.UserService;
+import com.billydev.blib.service.users.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 //@CrossOrigin(origins = "http://localhost:3000")

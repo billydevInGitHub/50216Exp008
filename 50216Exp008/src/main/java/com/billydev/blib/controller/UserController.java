@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.billydev.blib.model.ApiResponse;
 import com.billydev.blib.model.User;
 import com.billydev.blib.model.UserDto;
-import com.billydev.blib.service.UserService;
+import com.billydev.blib.service.users.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

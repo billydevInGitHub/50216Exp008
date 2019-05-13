@@ -7,10 +7,10 @@ public class WrapOfListDTApplInfo {
 
 	ArrayList<DT_Appl_Info>  data = new ArrayList<>();
 
-	public ArrayList<DT_Appl_Info> getRtApplList() {
+	public ArrayList<DT_Appl_Info> getDtApplList() {
 		return data;
 	}
-	public void setRtApplList(ArrayList<DT_Appl_Info> data) {
+	public void setDtApplList(ArrayList<DT_Appl_Info> data) {
 		this.data = data;
 	} 
 	

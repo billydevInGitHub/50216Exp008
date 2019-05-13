@@ -1,4 +1,4 @@
-package com.billydev.blib.service.impl;
+package com.billydev.blib.service.users;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import com.billydev.blib.dao.UserDao;
 import com.billydev.blib.model.User;
 import com.billydev.blib.model.UserDto;
-import com.billydev.blib.service.UserService;
 
 
 @Service(value = "userService")

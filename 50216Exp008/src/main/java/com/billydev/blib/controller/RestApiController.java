@@ -65,6 +65,25 @@ public class RestApiController {
 		return response; 
 	}
 	
+	/*
+	 * trigger the application through event
+	 * todo: url is hardcoded without event info passed-in, need to use event as input  
+	 */
+	@RequestMapping(value="/rtapplication/", method=RequestMethod.POST , produces = "application/json") 
+	public ResponseEntity<RT_Appl_Info> createRTapplication(@RequestBody Event_Info event_info){		
+		
+		/*
+		 * todo: just hardcode the event here, the dt_application_name supposed be passed from url
+		 */
+		
+		//Event_Info event_info = new Event_Info(); 
+		//event_info.setDT_Application_Name("data_88010_U001_Diagram_c");
+		RT_Appl_Info rtApplInfo=triggerService.trigger_application(event_info); 
+		
+		ResponseEntity<RT_Appl_Info> response= new ResponseEntity<>(rtApplInfo, HttpStatus.OK);
+		return response; 
+	}
+	
 	
 	/*
 	 * job cancelled msg received 
@@ -88,7 +107,7 @@ public class RestApiController {
 	/**
 	 * Runtime application info
 	 */
-	@RequestMapping(value = "/rt_appl_info/{appl_id}", method = RequestMethod.GET , produces = "application/json")
+	@RequestMapping(value = "/rtapplication/{appl_id}", method = RequestMethod.GET , produces = "application/json")
 	public ResponseEntity<Runtime_Appl_Info> get_runtime_appl_info(@PathVariable("appl_id") long appl_id) {
 		Runtime_Appl_Info  rtai= monitorService.get_Runtime_Appl_info(appl_id);
 		/*
@@ -152,7 +171,7 @@ public class RestApiController {
 	public ResponseEntity<WrapOfListDTApplInfo> listOfDTAppls(){	
 		ArrayList<DT_Appl_Info> listOfAppInfo= triggerService.listAllDesignTimeAppls();
 		WrapOfListDTApplInfo returnObject= new WrapOfListDTApplInfo();
-		returnObject.setRtApplList(listOfAppInfo);
+		returnObject.setDtApplList(listOfAppInfo);
 		
 		if (listOfAppInfo.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -162,6 +181,18 @@ public class RestApiController {
 	
 	}
 	
+	@RequestMapping(value="/dtapplications/", method=RequestMethod.GET , produces = "application/json") 
+	public ResponseEntity<WrapOfListDTApplInfo> listDTapplications(){	
+		ArrayList<DT_Appl_Info> listOfAppInfo= triggerService.listAllDesignTimeAppls();
+		WrapOfListDTApplInfo returnObject= new WrapOfListDTApplInfo();
+		returnObject.setDtApplList(listOfAppInfo);
+		
+		if (listOfAppInfo.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			// You many decide to return HttpStatus.NOT_FOUND
+		}
+		return new ResponseEntity<WrapOfListDTApplInfo>(returnObject, HttpStatus.OK);
 	
+	}
 
 }

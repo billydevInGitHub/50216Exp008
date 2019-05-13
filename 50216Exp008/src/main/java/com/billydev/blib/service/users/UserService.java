@@ -1,4 +1,4 @@
-package com.billydev.blib.service;
+package com.billydev.blib.service.users;
 
 import java.util.List;
 
