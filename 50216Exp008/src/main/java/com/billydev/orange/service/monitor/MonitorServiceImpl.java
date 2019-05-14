@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.billydev.blib.CommonConfiguration;
-import com.billydev.blib.CommonMsgInQueue;
 import com.billydev.blib.dao.RuntimeApplRepository;
 import com.billydev.blib.dao.RuntimeJobRepository;
+import com.billydev.blib.external.CommonConfiguration;
+import com.billydev.blib.external.CommonMsgInQueue;
 import com.billydev.blib.jobengine.RuntimeApplicationProcessor;
 import com.billydev.blib.model.RT_Job_Info;
 import com.billydev.blib.model.Runtime_Appl_Info;

@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysql-docker-container:
+    image: mysql:5.7.26
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=db_orange
+      - MYSQL_USER=billy
+      - MYSQL_PASSWORD=123456
+    ports:
+      - 9306:3306
+    volumes:
+      - /data/mysql
+  spring-boot-50216exp008:
+    image: spring-boot-50216exp008-image
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-docker-container
+    ports:
+      - 8087:8180
+    volumes:
+      - /data/spring-boot-50216Exp008

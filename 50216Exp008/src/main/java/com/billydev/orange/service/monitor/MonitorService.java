@@ -3,7 +3,7 @@ package com.billydev.orange.service.monitor;
 
 import java.util.List;
 
-import com.billydev.blib.CommonMsgInQueue;
+import com.billydev.blib.external.CommonMsgInQueue;
 import com.billydev.blib.model.RT_Job_Info;
 import com.billydev.blib.model.Runtime_Appl_Info;
 

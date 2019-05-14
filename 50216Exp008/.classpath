@@ -25,6 +25,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/30780_Exp065_JobEngineForOrange"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

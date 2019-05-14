@@ -9,11 +9,11 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.billydev.blib.CommonConfiguration;
-import com.billydev.blib.CommonMsgInQueue;
-import com.billydev.blib.CommonUtils;
 import com.billydev.blib.Configuration;
 import com.billydev.blib.dao.RuntimeJobRepository;
+import com.billydev.blib.external.CommonConfiguration;
+import com.billydev.blib.external.CommonMsgInQueue;
+import com.billydev.blib.external.CommonUtils;
 import com.billydev.blib.model.RT_Job_Info;
 import com.billydev.blib.model.Runtime_Appl_Info;
 import com.fasterxml.jackson.databind.ObjectMapper;

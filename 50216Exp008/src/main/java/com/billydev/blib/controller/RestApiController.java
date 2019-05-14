@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.billydev.blib.CommonMsgInQueue;
-import com.billydev.blib.CommonUtils;
+import com.billydev.blib.external.CommonMsgInQueue;
+import com.billydev.blib.external.CommonUtils;
 import com.billydev.blib.model.DT_Appl_Info;
 import com.billydev.blib.model.Event_Info;
 import com.billydev.blib.model.RT_Appl_Info;
