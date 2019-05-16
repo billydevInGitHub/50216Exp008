@@ -43,6 +43,7 @@ public class JwtTokenUtil implements Serializable {
 
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
+        System.out.println("JwtTokenUtil: token expriation:"+expiration.toString()+" current time:"+(new Date()).toString()); 
         return expiration.before(new Date());
     }
 
@@ -57,7 +58,7 @@ public class JwtTokenUtil implements Serializable {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setIssuer("http://devglan.com")
+                .setIssuer("http://billydev.com")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS*1000))
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
@@ -66,6 +67,7 @@ public class JwtTokenUtil implements Serializable {
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
+       System.out.println( "JwtTokenUtil.java validateToken:is TokenExpried:"+isTokenExpired(token));
         return (
               username.equals(userDetails.getUsername())
                     && !isTokenExpired(token));
