@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,34 +30,34 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ApiResponse<User> saveUser(@RequestBody UserDto user){
-        return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",userService.save(user));
+    public ResponseEntity<User> saveUser(@RequestBody UserDto user){
+        return new ResponseEntity<>(userService.save(user),HttpStatus.OK);
     }
 
     @GetMapping
-    public ApiResponse<List<User>> listUser(){
+    public ResponseEntity<List<User>> listUser(){
     	System.out.println("UserController listUser returned:"+Arrays.toString(userService.findAll().toArray()));
     	for(User user :userService.findAll() ) {
     		System.out.println("user is:"+user.getUsername());
     	}
     	
-        return new ApiResponse<>(HttpStatus.OK.value(), "User list fetched successfully.",userService.findAll());
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<User> getOne(@PathVariable int id){
-        return new ApiResponse<>(HttpStatus.OK.value(), "User fetched successfully.",userService.findById(id));
+    public ResponseEntity<User> getOne(@PathVariable int id){
+        return new ResponseEntity<>(userService.findById(id),HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<UserDto> update(@RequestBody UserDto userDto) {
-        return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.",userService.update(userDto));
+    public ResponseEntity<UserDto> update(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(userService.update(userDto),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<Void> delete(@PathVariable int id) {
+    public ResponseEntity<Void> delete(@PathVariable int id) {
         userService.delete(id);
-        return new ApiResponse<>(HttpStatus.OK.value(), "User deleted successfully.", null);
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
 

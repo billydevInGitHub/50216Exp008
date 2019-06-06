@@ -44,13 +44,13 @@ public class AuthenticationController {
     private UserService userService;
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ApiResponse<AuthToken> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
+    public ResponseEntity<AuthToken> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
        	System.out.println("AuthenticationController, request received123"); 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
         final User user = userService.findOne(loginUser.getUsername());
         final String token = jwtTokenUtil.generateToken(user);
     	System.out.println("AuthenticationController, got the token :"+token);
-        return new ApiResponse<>(200, "success",new AuthToken(token, user.getUsername()));
+        return new ResponseEntity<>(new AuthToken(token, user.getUsername()), HttpStatus.OK);
 
     }
     
