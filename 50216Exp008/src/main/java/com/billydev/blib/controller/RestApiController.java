@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.billydev.blib.external.CommonMsgInQueue;
 import com.billydev.blib.external.CommonUtils;
+import com.billydev.blib.model.APPTrig_Event_Info;
 import com.billydev.blib.model.DT_Appl_Info;
-import com.billydev.blib.model.Event_Info;
 import com.billydev.blib.model.RT_Appl_Info;
 import com.billydev.blib.model.Runtime_Appl_Info;
 import com.billydev.blib.model.WrapOfListDTApplInfo;
@@ -57,7 +57,7 @@ public class RestApiController {
 		 * todo: just hardcode the event here, the dt_application_name supposed be passed from url
 		 */
 		
-		Event_Info event_info = new Event_Info(); 
+		APPTrig_Event_Info event_info = new APPTrig_Event_Info(); 
 		event_info.setDT_Application_Name("data_88010_U001_Diagram_c");
 		RT_Appl_Info rtApplInfo=triggerService.trigger_application(event_info); 
 		
@@ -70,7 +70,7 @@ public class RestApiController {
 	 * todo: url is hardcoded without event info passed-in, need to use event as input  
 	 */
 	@RequestMapping(value="/rtapplication/", method=RequestMethod.POST , produces = "application/json") 
-	public ResponseEntity<RT_Appl_Info> createRTapplication(@RequestBody Event_Info event_info){		
+	public ResponseEntity<RT_Appl_Info> createRTapplication(@RequestBody APPTrig_Event_Info apptrig_event_info){		
 		
 		/*
 		 * todo: just hardcode the event here, the dt_application_name supposed be passed from url
@@ -78,7 +78,7 @@ public class RestApiController {
 		
 		//Event_Info event_info = new Event_Info(); 
 		//event_info.setDT_Application_Name("data_88010_U001_Diagram_c");
-		RT_Appl_Info rtApplInfo=triggerService.trigger_application(event_info); 
+		RT_Appl_Info rtApplInfo=triggerService.trigger_application(apptrig_event_info); 
 		
 		ResponseEntity<RT_Appl_Info> response= new ResponseEntity<>(rtApplInfo, HttpStatus.OK);
 		return response; 
@@ -146,14 +146,14 @@ public class RestApiController {
 		return new ResponseEntity<Boolean>(returnObject, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/updateDTAppl/", method = RequestMethod.POST)
+	@RequestMapping(value = "/dtapplication/", method = RequestMethod.PATCH)
 	public ResponseEntity<?> updateDTAppl(@RequestBody DT_Appl_Info dtApplInfo) {
 		logger.info("Updating DT application{}", dtApplInfo);
 
 
-		Boolean returnObject=triggerService.updateDesignTimeAppl(dtApplInfo);
+		DT_Appl_Info returnObject=triggerService.updateDesignTimeAppl(dtApplInfo);
 
-		return new ResponseEntity<Boolean>(returnObject, HttpStatus.CREATED);
+		return new ResponseEntity<DT_Appl_Info>(returnObject, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/createDTAppl/", method = RequestMethod.POST)

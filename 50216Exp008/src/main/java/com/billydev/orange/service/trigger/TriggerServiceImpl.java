@@ -1,7 +1,6 @@
 package com.billydev.orange.service.trigger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -13,9 +12,9 @@ import com.billydev.blib.dao.DesigntimeApplRepository;
 import com.billydev.blib.dao.RuntimeApplRepository;
 import com.billydev.blib.dao.RuntimeJobRepository;
 import com.billydev.blib.jobengine.RuntimeApplicationProcessor;
+import com.billydev.blib.model.APPTrig_Event_Info;
 import com.billydev.blib.model.DT_Appl_Info;
 import com.billydev.blib.model.DT_Job_Info;
-import com.billydev.blib.model.Event_Info;
 import com.billydev.blib.model.RT_Appl_Info;
 import com.billydev.blib.model.RT_Job_Info;
 import com.billydev.blib.model.Runtime_Appl_Info;
@@ -23,6 +22,7 @@ import com.billydev.blib.model.Runtime_Appl_Info;
 
 
 @Service("triggerService")
+@Transactional 
 public class TriggerServiceImpl implements TriggerService{
 	
 	private static final AtomicLong counter = new AtomicLong();
@@ -46,8 +46,7 @@ public class TriggerServiceImpl implements TriggerService{
     private RuntimeJobRepository rtJobRepository;  
     
 	@Override
-	@Transactional 
-	public RT_Appl_Info trigger_application(Event_Info event_info) {
+	public RT_Appl_Info trigger_application(APPTrig_Event_Info event_info) {
 		/*
 		 * the method could be used for both manually trigger or scheduled trigger
 		 * 
@@ -167,7 +166,7 @@ public class TriggerServiceImpl implements TriggerService{
 	
 	
 	@Override
-	public Boolean updateDesignTimeAppl(DT_Appl_Info dtApplInfo) {
+	public DT_Appl_Info updateDesignTimeAppl(DT_Appl_Info dtApplInfo) {
 		return dtApplRepository.updateDesignTimeAppl(dtApplInfo);
 		
 	}

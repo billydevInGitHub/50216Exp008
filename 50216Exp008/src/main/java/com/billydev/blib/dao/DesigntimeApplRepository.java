@@ -33,7 +33,7 @@ public class DesigntimeApplRepository {
     	
     	String sql=    		"select job.DT_Application_Name , job.script,appl.applscript,   "
         		+ " job.agent_name, job.DT_Job_Name, job.script, job.job_id, job.predecessor_condition, "
-        		+ "job.predecessor_names, successor_names, job.Arguments_Of_Script  "
+        		+ "job.predecessor_names, successor_names, job.Arguments_Of_Script, appl.appl_id, appl.appl_create_user_id "
         		+ " from dt_appl_info appl, dt_job_info job where appl.DT_Application_Name=job.DT_Application_Name "
         		+ "and job.DT_application_name=? " ; 
 //    	sql=    		"select job.DT_Application_Name ,  job.script "
@@ -57,9 +57,15 @@ public class DesigntimeApplRepository {
                     	dtAppInfo.setAppName(rs.getString("DT_Application_Name"));
 
                     	dtAppInfo.setApplscript(rs.getString("applscript"));
+                    	
+                    	dtAppInfo.setAppl_id(rs.getLong("appl_id"));
+                    	
+                    	dtAppInfo.setAppCreateUserId(rs.getString("appl_create_user_id"));
 
                     	dtJobInfo.setAgent_name(rs.getString("Agent_Name"));
-
+                    	
+                    	
+                    	
                     	dtJobInfo.setArguments_of_script(rs.getString("Arguments_Of_Script"));
 
                     	dtJobInfo.setDT_Applicatoin_Name(rs.getString("DT_Application_Name"));
@@ -119,7 +125,7 @@ public class DesigntimeApplRepository {
   }
     
     
-    public Boolean updateDesignTimeAppl(DT_Appl_Info dtApplInfo) {
+    public DT_Appl_Info updateDesignTimeAppl(DT_Appl_Info dtApplInfo) {
     	  jdbcTemplate.update(
     			  "update dt_appl_info set DT_application_name=? ,appl_create_user_id=? where appl_id=?", 
     			  dtApplInfo.getAppName(),
@@ -127,9 +133,11 @@ public class DesigntimeApplRepository {
     			  dtApplInfo.getAppl_id()); 
     	  
     	  System.out.println("dtAppInfo: appname:"+dtApplInfo.getAppName()
-    	           +" createrid:"+dtApplInfo.getAppCreateUserId());
+    	           +" createrid:"+dtApplInfo.getAppCreateUserId()+" appl_id:"+dtApplInfo.getAppl_id());
     	  
-    	  return true; 
+    	  
+    	  
+    	  return getDesignTime_Appl_info(dtApplInfo.getAppName()); 
     }
     
     
