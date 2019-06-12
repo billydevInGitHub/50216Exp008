@@ -12,7 +12,7 @@ import com.billydev.blib.dao.DesigntimeApplRepository;
 import com.billydev.blib.dao.RuntimeApplRepository;
 import com.billydev.blib.dao.RuntimeJobRepository;
 import com.billydev.blib.jobengine.RuntimeApplicationProcessor;
-import com.billydev.blib.model.APPTrig_Event_Info;
+import com.billydev.blib.model.Event_Info;
 import com.billydev.blib.model.DT_Appl_Info;
 import com.billydev.blib.model.DT_Job_Info;
 import com.billydev.blib.model.RT_Appl_Info;
@@ -22,7 +22,6 @@ import com.billydev.blib.model.Runtime_Appl_Info;
 
 
 @Service("triggerService")
-@Transactional 
 public class TriggerServiceImpl implements TriggerService{
 	
 	private static final AtomicLong counter = new AtomicLong();
@@ -46,7 +45,8 @@ public class TriggerServiceImpl implements TriggerService{
     private RuntimeJobRepository rtJobRepository;  
     
 	@Override
-	public RT_Appl_Info trigger_application(APPTrig_Event_Info event_info) {
+	@Transactional 
+	public RT_Appl_Info trigger_application(Event_Info event_info) {
 		/*
 		 * the method could be used for both manually trigger or scheduled trigger
 		 * 
@@ -66,14 +66,14 @@ public class TriggerServiceImpl implements TriggerService{
 		 * so far just hardcode here
 		 * todo: need to use enscript to replace the hardcode stuff here!! 
 		 */
-		runtime_appl_info.setApplicationName(event_info.getDT_Application_Name());
-		runtime_appl_info.setDT_ApplicationName(event_info.getDT_Application_Name());
+		runtime_appl_info.setApplicationName(event_info.getDtappname());
+		runtime_appl_info.setDT_ApplicationName(event_info.getDtappname());
 		
 		/*
 		 * get the DT application (include dt jobs) from DAO using the DT application name in the event!! 
 		 */
 		
-		DT_Appl_Info dt_appl_info = dtApplRepository.getDesignTime_Appl_info(event_info.getDT_Application_Name());
+		DT_Appl_Info dt_appl_info = dtApplRepository.getDesignTime_Appl_info(event_info.getDtappname());
 		
 		List<DT_Job_Info> list_DT_Job_Info=dt_appl_info.getJobList(); 
 		ArrayList<RT_Job_Info> list_RT_Job_Info= new ArrayList<>(); 
@@ -116,9 +116,9 @@ public class TriggerServiceImpl implements TriggerService{
 		
 		runtime_appl_info.setJobs(list_RT_Job_Info);	
 		
-		
-		RuntimeApplicationProcessor.setupPrdecessorSuccessorListByName(list_RT_Job_Info);
-		
+
+		RuntimeApplicationProcessor.setupPrdecessorSuccessorListByName(list_RT_Job_Info);	
+
 		/*
 		 * then need to insert rt_job_info with return id 
 		 */
@@ -138,8 +138,12 @@ public class TriggerServiceImpl implements TriggerService{
 		 * need to call overallCheckAndProcess in RuntimeApplicationProcessor
 		 */
 		
-		
-		runtimeApplicationProcessor.overallCheckAndProcess(runtime_appl_info);
+		try {				
+			runtimeApplicationProcessor.overallCheckAndProcess(runtime_appl_info);
+		}catch(Exception e) {
+			System.out.println("TriggerServiceImpl: caught exception ... making all jobs as agent down..."+e.toString());
+			//e.printStackTrace();
+		}
 		
 	RT_Appl_Info returnSimpleRtApplInfo= new RT_Appl_Info(); 
 		returnSimpleRtApplInfo.setAppl_id(rtAppId);

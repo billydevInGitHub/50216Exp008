@@ -135,6 +135,8 @@ public class RuntimeApplRepository {
             new RowCallbackHandler(){  
                 @Override  
                 public void processRow(ResultSet rs) throws SQLException { 
+                  System.out.println("RuntimeApplRepository: get total of rt_appl_info: rs.getLong(1): "+rs.getLong(1)
+                  		+"    rs.getLong(totalAppls): "+rs.getLong("totalAppls"));
               	  rt_appl_info.setGenerationNumber(rs.getLong("totalAppls")+1);
                 }
             }
@@ -157,7 +159,7 @@ public class RuntimeApplRepository {
     	  jdbcTemplate.update(
     	    	    connection -> {
     	                PreparedStatement ps = connection.prepareStatement(sql_insert, new String[] {"RT_appl_id"});
-    	                
+    	                  System.out.println("Sql_insert is:"+sql_insert);
     	                  ps.setString(1, rt_appl_info.getDT_ApplicationName());
     					  ps.setString(2, rt_appl_info.getApplicationName() );
     					  ps.setLong(3, rt_appl_info.getGenerationNumber());
