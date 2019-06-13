@@ -1,12 +1,25 @@
 package com.billydev.blib.model;
 
+import java.sql.Timestamp;
+
 public class Event_Info {
 	
 	long event_id; 
 	String dtappname; 
+	Timestamp next_scheduled_time; 
 	
 	public String getDtappname() {
 		return dtappname;
+	}
+
+
+	public Timestamp getNext_scheduled_time() {
+		return next_scheduled_time;
+	}
+
+
+	public void setNext_scheduled_time(Timestamp next_scheduled_time) {
+		this.next_scheduled_time = next_scheduled_time;
 	}
 
 

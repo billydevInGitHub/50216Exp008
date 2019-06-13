@@ -180,6 +180,20 @@ public class RestApiController {
 		return new ResponseEntity<WrapOfListDTApplInfo>(returnObject, HttpStatus.OK);
 	
 	}
+
+	@RequestMapping(value="/events/", method=RequestMethod.GET , produces = "application/json") 
+	public ResponseEntity<ArrayList<Event_Info>> listEvents(){	
+		ArrayList<Event_Info> listOfEvents= triggerService.getAllEvents();
+//		WrapOfListDTApplInfo returnObject= new WrapOfListDTApplInfo();
+//		returnObject.setDtApplList(listOfAppInfo);
+		
+		if (listOfEvents.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			// You may decide to return HttpStatus.NOT_FOUND
+		}
+		return new ResponseEntity<ArrayList<Event_Info>>(listOfEvents, HttpStatus.OK);
+	
+	}
 	
 	@RequestMapping(value="/dtapplications/", method=RequestMethod.GET , produces = "application/json") 
 	public ResponseEntity<WrapOfListDTApplInfo> listDTapplications(){	

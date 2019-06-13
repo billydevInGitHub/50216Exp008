@@ -22,7 +22,9 @@ public interface TriggerService {
 
 	Boolean deleteDesignTimeAppl(long appl_id);
 
-	RT_Appl_Info trigger_application(Event_Info event_info);  
+	RT_Appl_Info trigger_application(Event_Info event_info);
+
+	ArrayList<Event_Info> getAllEvents();  
 	
 
 	

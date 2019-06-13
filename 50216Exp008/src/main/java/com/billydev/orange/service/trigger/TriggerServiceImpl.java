@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.billydev.blib.dao.DesigntimeApplRepository;
+import com.billydev.blib.dao.EventInfoRepository;
 import com.billydev.blib.dao.RuntimeApplRepository;
 import com.billydev.blib.dao.RuntimeJobRepository;
 import com.billydev.blib.jobengine.RuntimeApplicationProcessor;
@@ -43,6 +44,9 @@ public class TriggerServiceImpl implements TriggerService{
     
     @Autowired
     private RuntimeJobRepository rtJobRepository;  
+
+    @Autowired
+    private EventInfoRepository eventInfoRepository;  
     
 	@Override
 	@Transactional 
@@ -180,6 +184,13 @@ public class TriggerServiceImpl implements TriggerService{
 	public Boolean deleteDesignTimeAppl(long appl_id) {
 		return dtApplRepository.deleteDesignTimeAppl(appl_id);
 		
+	}
+
+
+	@Override
+	public ArrayList<Event_Info> getAllEvents() {
+		
+		return eventInfoRepository.getAllEvents();
 	}
 	
 	/*
