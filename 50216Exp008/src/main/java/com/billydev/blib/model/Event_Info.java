@@ -7,9 +7,20 @@ public class Event_Info {
 	long event_id; 
 	String dtappname; 
 	Timestamp next_scheduled_time; 
+	String eventCreatorUserId; 
 	
 	public String getDtappname() {
 		return dtappname;
+	}
+
+
+	public String getEventCreatorUserId() {
+		return eventCreatorUserId;
+	}
+
+
+	public void setEventCreatorUserId(String eventCreatorUserId) {
+		this.eventCreatorUserId = eventCreatorUserId;
 	}
 
 

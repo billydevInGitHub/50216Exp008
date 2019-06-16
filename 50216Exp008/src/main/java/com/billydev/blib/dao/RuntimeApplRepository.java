@@ -51,7 +51,7 @@ public class RuntimeApplRepository {
         			  * todo: here we hardcoded appl.generation_number, in future client
         			  * need to pass in the generation number
         			  */
-        		"select job.Job_Id, x, y, width, height, x_job_name, y_job_name, job.job_name, job.state   "
+        		"select job.Job_Id, x, y, width, height, x_job_name, y_job_name, job.job_name, job.state,appl.Application_Name   "
         		+ "from appl_diagram_rect rect, RT_appl_info appl, RT_job_info job " + 
         		"where appl.DT_Application_Name=rect.DT_Application_Name " + 
         		"      and job.job_name=rect.job_name and appl.generation_number=job.appl_generation_number  " + 
@@ -70,6 +70,7 @@ public class RuntimeApplRepository {
                     	rectInfo.setJob_name(rs.getString("job_name"));
                     	rectInfo.setState(rs.getString("state"));
                     	arrayListRect.add(rectInfo);
+                    	runtimeAppInfo.setApplicationName(rs.getString("Application_Name"));
                     }
                 }
              );
