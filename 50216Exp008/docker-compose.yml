@@ -26,7 +26,7 @@ services:
   core-job-engine:
      image: 30780exp065
      build:
-        context:/home/ubuntu/billydev/190619-1-11041Exp007/30780Exp065/30780_Exp065_JobEngineForOrange
+        context: /home/ubuntu/billydev/190619-1-11041Exp007/30780Exp065/30780_Exp065_JobEngineForOrange
         dockerfile: Dockerfile
      depends_on:
       - mysql-docker-container
