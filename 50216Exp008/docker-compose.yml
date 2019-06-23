@@ -20,6 +20,6 @@ services:
     depends_on:
       - mysql-docker-container
     ports:
-      - 8443:8443
+      - 8087:8180
     volumes:
       - /data/spring-boot-50216Exp008
