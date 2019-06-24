@@ -33,7 +33,9 @@ services:
      ports:
       - 28080:28080
   job-agent-linux:
-     image: job-agent-linux: /home/ubuntu/billydev/190624-1-35000Exp001/35000Exp001/35000_Exp001_BashJavaAgent
+     image:  job-agent-linux-35000exp001
+     build:
+        context: /home/ubuntu/billydev/190624-1-35000Exp001/35000Exp001/35000_Exp001_BashJavaAgent
         dockerfile: Dockerfile
      depends_on:
       - mysql-docker-container
