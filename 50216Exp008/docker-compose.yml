@@ -9,7 +9,7 @@ services:
       - MYSQL_USER=billy
       - MYSQL_PASSWORD=123456
     ports:
-      - 9306:3306
+      - 3306:3306
     volumes:
       - /data/mysql
   spring-boot-50216exp008:
@@ -20,13 +20,22 @@ services:
     depends_on:
       - mysql-docker-container
     ports:
-      - 8087:8180
+      - 8180:8180
     volumes:
       - /data/spring-boot-50216Exp008
   core-job-engine:
-     image: 30780exp065
+     image: core-job-engine-30780exp065
      build:
         context: /home/ubuntu/billydev/190619-1-11041Exp007/30780Exp065/30780_Exp065_JobEngineForOrange
         dockerfile: Dockerfile
      depends_on:
       - mysql-docker-container
+     ports:
+      - 28080:28080
+  job-agent-linux:
+     image: job-agent-linux: /home/ubuntu/billydev/190624-1-35000Exp001/35000Exp001/35000_Exp001_BashJavaAgent
+        dockerfile: Dockerfile
+     depends_on:
+      - mysql-docker-container
+     ports:
+      - 9898:9898     
