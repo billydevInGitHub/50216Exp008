@@ -31,14 +31,14 @@ public class DesigntimeApplRepository {
     	Object[] values = new Object[] { dt_Application_Name };
     	DT_Job_Info dt_job_info=null; 
     	
-    	String sql=    		"select job.DT_Application_Name , job.script,appl.applscript,   "
-        		+ " job.agent_name, job.DT_Job_Name, job.script, job.job_id, job.predecessor_condition, "
-        		+ "job.predecessor_names, successor_names, job.Arguments_Of_Script, appl.appl_id, appl.appl_create_user_id "
-        		+ " from dt_appl_info appl, dt_job_info job where appl.DT_Application_Name=job.DT_Application_Name "
-        		+ "and job.DT_application_name=? " ; 
-//    	sql=    		"select job.DT_Application_Name ,  job.script "
-//        		+ " from dt_appl_info appl, dt_job_info job where appl.DT_Application_Name=job.DT_Application_Name "
-//        		+ "and job.DT_application_name=? " ; 
+    	String sql=    		"select job.dt_application_name , job.script,appl.applscript,   "
+        		+ " job.agent_name, job.dt_job_name, job.script, job.job_id, job.predecessor_condition, "
+        		+ "job.predecessor_names, successor_names, job.arguments_of_script, appl.appl_id, appl.appl_create_user_id "
+        		+ " from dt_appl_info appl, dt_job_info job where appl.dt_application_name=job.dt_application_name "
+        		+ "and job.dt_application_name=? " ; 
+//    	sql=    		"select job.dt_application_name ,  job.script "
+//        		+ " from dt_appl_info appl, dt_job_info job where appl.dt_application_name=job.dt_application_name "
+//        		+ "and job.dt_application_name=? " ; 
     	/*
     	 * first query the appl info
     	 */
@@ -54,7 +54,7 @@ public class DesigntimeApplRepository {
                     @Override  
                     public void processRow(ResultSet rs) throws SQLException { 
                     	DT_Job_Info dtJobInfo= new DT_Job_Info(); 
-                    	dtAppInfo.setAppName(rs.getString("DT_Application_Name"));
+                    	dtAppInfo.setAppName(rs.getString("dt_application_name"));
 
                     	dtAppInfo.setApplscript(rs.getString("applscript"));
                     	
@@ -62,20 +62,20 @@ public class DesigntimeApplRepository {
                     	
                     	dtAppInfo.setAppCreateUserId(rs.getString("appl_create_user_id"));
 
-                    	dtJobInfo.setAgent_name(rs.getString("Agent_Name"));
+                    	dtJobInfo.setAgent_name(rs.getString("agent_name"));
                     	
                     	
                     	
-                    	dtJobInfo.setArguments_of_script(rs.getString("Arguments_Of_Script"));
+                    	dtJobInfo.setArguments_of_script(rs.getString("arguments_of_script"));
 
-                    	dtJobInfo.setDT_Applicatoin_Name(rs.getString("DT_Application_Name"));
-                    	dtJobInfo.setDT_Job_Name(rs.getString("DT_Job_Name"));
+                    	dtJobInfo.setDT_Applicatoin_Name(rs.getString("dt_application_name"));
+                    	dtJobInfo.setDT_Job_Name(rs.getString("dt_job_name"));
 
-                    	dtJobInfo.setJob_Id(rs.getLong("Job_Id"));
+                    	dtJobInfo.setJob_Id(rs.getLong("job_id"));
                     	//dtJobInfo.setPredecessor_Condition(rs.getString("Predecessor_Condition"));
 
-                    	dtJobInfo.setPredecessor_names(rs.getString("Predecessor_Names"));
-                    	dtJobInfo.setSuccessor_names(rs.getString("Successor_Names"));
+                    	dtJobInfo.setPredecessor_names(rs.getString("predecessor_names"));
+                    	dtJobInfo.setSuccessor_names(rs.getString("successor_names"));
                     	/*
                     	 * try to deal with +embedded objects 
                     	 * seems we do not need real job list for design time, only job_id ( job_name) is fine 
@@ -89,7 +89,7 @@ public class DesigntimeApplRepository {
                     	   
                     	
                     	//dtJobInfo.setQualifier(rs.getString("Qualifier"));
-                    	dtJobInfo.setScript(rs.getString("Script"));
+                    	dtJobInfo.setScript(rs.getString("script"));
                     	//dtJobInfo.setScript_userid(rs.getString("Script_userid"));
                           	/*
                     	 * try to deal with embedded objects 
@@ -127,7 +127,7 @@ public class DesigntimeApplRepository {
     
     public DT_Appl_Info updateDesignTimeAppl(DT_Appl_Info dtApplInfo) {
     	  jdbcTemplate.update(
-    			  "update dt_appl_info set DT_application_name=? ,appl_create_user_id=? where appl_id=?", 
+    			  "update dt_appl_info set dt_application_name=? ,appl_create_user_id=? where appl_id=?", 
     			  dtApplInfo.getAppName(),
     			  dtApplInfo.getAppCreateUserId(),
     			  dtApplInfo.getAppl_id()); 
@@ -160,7 +160,7 @@ public class DesigntimeApplRepository {
     	 */
         
     	  jdbcTemplate.batchUpdate(
-    			  "insert into dt_appl_info(DT_application_name, appl_create_user_id) "
+    			  "insert into dt_appl_info(dt_application_name, appl_create_user_id) "
     			  + "values ('"+  dtApplInfo.getAppName()+"','"+dtApplInfo.getAppCreateUserId()+ "')");
    	
     	
@@ -182,7 +182,7 @@ public class DesigntimeApplRepository {
                     @Override  
                     public void processRow(ResultSet rs) throws SQLException { 
                     	DT_Appl_Info dt_appl_info =  new DT_Appl_Info();
-                    	dt_appl_info.setAppName(rs.getString("DT_Application_Name"));
+                    	dt_appl_info.setAppName(rs.getString("dt_application_name"));
                     	dt_appl_info.setAppl_id(rs.getLong("appl_id"));
                     	dt_appl_info.setUploadTime(rs.getTimestamp("upload_time"));
                     	dt_appl_info.setAppCreateUserId(rs.getString("appl_create_user_id"));

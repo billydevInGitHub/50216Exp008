@@ -51,11 +51,11 @@ public class RuntimeApplRepository {
         			  * todo: here we hardcoded appl.generation_number, in future client
         			  * need to pass in the generation number
         			  */
-        		"select job.Job_Id, x, y, width, height, x_job_name, y_job_name, job.job_name, job.state,appl.Application_Name   "
-        		+ "from appl_diagram_rect rect, RT_appl_info appl, RT_job_info job " + 
-        		"where appl.DT_Application_Name=rect.DT_Application_Name " + 
+        		"select job.Job_Id, x, y, width, height, x_job_name, y_job_name, job.job_name, job.state,appl.application_name   "
+        		+ "from appl_diagram_rect rect, rt_appl_info appl, rt_job_info job " + 
+        		"where appl.dt_application_name=rect.dt_application_name " + 
         		"      and job.job_name=rect.job_name and appl.generation_number=job.appl_generation_number  " + 
-        		"      and appl.Application_name=job.application_name  and appl.RT_appl_id=? ",
+        		"      and appl.application_name=job.application_name  and appl.rt_appl_id=? ",
         		values,
                 new RowCallbackHandler(){  
                     @Override  
@@ -64,13 +64,13 @@ public class RuntimeApplRepository {
                     	rectInfo.setX(rs.getInt("x"));
                     	rectInfo.setY(rs.getInt("y"));
                     	rectInfo.setWidth(rs.getInt("width"));
-                    	rectInfo.setHeight(rs.getInt("Height"));
+                    	rectInfo.setHeight(rs.getInt("height"));
                     	rectInfo.setX_job_name(rs.getInt("x_job_name"));
                     	rectInfo.setY_job_name(rs.getInt("y_job_name"));
                     	rectInfo.setJob_name(rs.getString("job_name"));
                     	rectInfo.setState(rs.getString("state"));
                     	arrayListRect.add(rectInfo);
-                    	runtimeAppInfo.setApplicationName(rs.getString("Application_Name"));
+                    	runtimeAppInfo.setApplicationName(rs.getString("application_name"));
                     }
                 }
              );
@@ -88,9 +88,9 @@ public class RuntimeApplRepository {
   			  * ignore the where filter and ignore the jobs first 
   			  * todo : here we hardcode the rt_appl_info generation number 
   			  */
-  		"select  x1, y1, x2, y2, hasArrow, appl.application_name "
-  		+ "from RT_appl_info appl, appl_diagram_line line "
-  		+ "where line.DT_Application_Name=appl.DT_application_name and  appl.RT_appl_id=?  ",
+  		"select  x1, y1, x2, y2, hasarrow, appl.application_name "
+  		+ "from rt_appl_info appl, appl_diagram_line line "
+  		+ "where line.dt_application_name=appl.dt_application_name and  appl.rt_appl_id=?  ",
   		values,
           new RowCallbackHandler(){  
               @Override  
@@ -100,7 +100,7 @@ public class RuntimeApplRepository {
               	lineInfo.setY1(rs.getInt("y1"));
               	lineInfo.setX2(rs.getInt("x2"));
               	lineInfo.setY2(rs.getInt("y2"));
-              	lineInfo.setHasArrow(rs.getString("hasArrow"));
+              	lineInfo.setHasArrow(rs.getString("hasarrow"));
               	arrayListLine.add(lineInfo);
               }
           }
@@ -152,14 +152,14 @@ public class RuntimeApplRepository {
         
 
     	  
-    	  final String sql_insert="insert into rt_appl_info(DT_application_name, application_name, generation_number) "
+    	  final String sql_insert="insert into rt_appl_info(dt_application_name, application_name, generation_number) "
     			  + "values (?,?,?)" ;
     	  
     	  KeyHolder keyHolder = new GeneratedKeyHolder();
     	  
     	  jdbcTemplate.update(
     	    	    connection -> {
-    	                PreparedStatement ps = connection.prepareStatement(sql_insert, new String[] {"RT_appl_id"});
+    	                PreparedStatement ps = connection.prepareStatement(sql_insert, new String[] {"rt_appl_id"});
     	                  System.out.println("Sql_insert is:"+sql_insert);
     	                  ps.setString(1, rt_appl_info.getDT_ApplicationName());
     					  ps.setString(2, rt_appl_info.getApplicationName() );
@@ -191,9 +191,9 @@ public class RuntimeApplRepository {
   		+ "job.job_id, job.job_name, job.application_name, job.appl_generation_number,  "
   		+ " job.predecessor_names, job.state, job.agent_name, job.script, "
   		+ " job.arguments_of_script, job.userid   "
-  		+ "from  RT_appl_info appl, RT_job_info job " + 
+  		+ "from  rt_appl_info appl, rt_job_info job " + 
   		" where  job.appl_generation_number=appl.generation_number " + 
-  		"      and appl.Application_name=job.application_name  and job.job_id=? ",
+  		"      and appl.application_name=job.application_name  and job.job_id=? ",
   		values,
           new RowCallbackHandler(){  
               @Override  
@@ -230,9 +230,9 @@ public class RuntimeApplRepository {
         		+ "job.job_id, job.job_name, job.application_name, job.appl_generation_number,  "
         		+ " job.predecessor_names, job.state, job.agent_name, job.script, "
         		+ " job.arguments_of_script, job.userid   "
-        		+ "from  RT_appl_info appl, RT_job_info job " + 
+        		+ "from  rt_appl_info appl, rt_job_info job " + 
         		" where  job.appl_generation_number=appl.generation_number " + 
-        		"      and appl.Application_name=job.application_name  and job.application_name=? "
+        		"      and appl.application_name=job.application_name  and job.application_name=? "
         		+ " and job.appl_generation_number=? ",
         		values,
                 new RowCallbackHandler(){  

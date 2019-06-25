@@ -25,7 +25,7 @@ public class RuntimeJobRepository {
     	
     	
     	final String INSERT_SQL = "insert into rt_job_info (job_type, job_name,qualifier, application_name, appl_generation_number, "
-  			  + "Predecessor_names, Successor_names, state, Agent_name,script, arguments_Of_script, UserID ) "
+  			  + "predecessor_names, successor_names, state, agent_name,script, arguments_of_script, userid ) "
   			  + "values (?,?,?,?,?,?,?,?,?,?,?,?)";
     	KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
@@ -109,23 +109,23 @@ public class RuntimeJobRepository {
   			 /*
   			  * ignore the where filter and ignore the jobs first 
   			  */
-  		"select * from rt_job_info where Job_id=?",
+  		"select * from rt_job_info where job_id=?",
   		values,
           new RowCallbackHandler(){  
               @Override  
               public void processRow(ResultSet rs) throws SQLException { 
-              	rtJobInfo.setJob_id(rs.getLong("Job_Id"));
-              	rtJobInfo.setJob_type(rs.getString("Job_Type"));
-              	rtJobInfo.setJob_name(rs.getString("Job_Name"));
-              	rtJobInfo.setQualifier(rs.getString("Qualifier"));
-              	rtJobInfo.setApplication_name(rs.getString("Application_Name"));
+              	rtJobInfo.setJob_id(rs.getLong("job_id"));
+              	rtJobInfo.setJob_type(rs.getString("job_type"));
+              	rtJobInfo.setJob_name(rs.getString("job_name"));
+              	rtJobInfo.setQualifier(rs.getString("qualifier"));
+              	rtJobInfo.setApplication_name(rs.getString("application_name"));
               	rtJobInfo.setAppl_generation_number(rs.getLong("appl_generation_number"));
-              	rtJobInfo.setPredecessor_names(rs.getString("Predecessor_Names"));
+              	rtJobInfo.setPredecessor_names(rs.getString("predecessor_names"));
               	rtJobInfo.setState(rs.getString("state"));
-              	rtJobInfo.setAgent_name(rs.getString("Agent_Name"));
+              	rtJobInfo.setAgent_name(rs.getString("agent_name"));
               	rtJobInfo.setScript(rs.getString("script")); 
-              	rtJobInfo.setArguments_of_script(rs.getString("arguments_Of_Script"));
-              	rtJobInfo.setUser_id(rs.getString("UserID"));
+              	rtJobInfo.setArguments_of_script(rs.getString("arguments_of_script"));
+              	rtJobInfo.setUser_id(rs.getString("userid"));
               }
           }
        );
