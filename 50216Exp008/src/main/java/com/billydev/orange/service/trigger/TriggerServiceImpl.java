@@ -106,7 +106,7 @@ public class TriggerServiceImpl implements TriggerService{
 			rt_job_info.setPredecessor_names(dt_job_info.getPredecessor_names());
 			rt_job_info.setJob_name(dt_job_info.getDT_Job_Name());
 			rt_job_info.setAgent_name(dt_job_info.getAgent_name());
-			rt_job_info.setTarget("192.168.1.65");//todo: the trigger procedure need resolve from agentName !! 
+			rt_job_info.setTarget("localhost");//todo: the trigger procedure need resolve from agentName !! 
 			rt_job_info.setPort(9898);	
 			rt_job_info.setScript(dt_job_info.getScript());  //todo: need to resolve the script name stuff  
 			rt_job_info.setState("01"); //todo: temp hardcode to wait state
