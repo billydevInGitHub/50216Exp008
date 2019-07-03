@@ -134,6 +134,37 @@ public class RestApiController {
 	 * @param message
 	 * @return
 	 */
+
+	@RequestMapping(value = "/dtapplication/", method = RequestMethod.POST)
+	public ResponseEntity<?> createDTAppl(@RequestBody DT_Appl_Info dtApplInfo) {
+		logger.info("Creating New DT application{}", dtApplInfo);
+
+
+		Boolean returnObject=triggerService.createDesignTimeAppl(dtApplInfo);
+
+		return new ResponseEntity<Boolean>(returnObject, HttpStatus.CREATED);
+	}
+	
+	//todo:remove "/createDTAppl/"
+	@RequestMapping(value = "/createDTAppl/", method = RequestMethod.POST)
+	public ResponseEntity<?> createDTApplOld(@RequestBody DT_Appl_Info dtApplInfo) {
+		logger.info("Creating New DT application{}", dtApplInfo);
+
+
+		Boolean returnObject=triggerService.createDesignTimeAppl(dtApplInfo);
+
+		return new ResponseEntity<Boolean>(returnObject, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/dtapplication/{appl_id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteDTAppl(@PathVariable("appl_id") long appl_id) {
+		logger.info("delete DT application, appl_id:", appl_id);
+
+
+		Boolean returnObject=triggerService.deleteDesignTimeAppl(appl_id);
+
+		return new ResponseEntity<Boolean>(returnObject, HttpStatus.OK);
+	}
 	
 	
 	@RequestMapping(value = "/deleteDTAppl/", method = RequestMethod.POST)
@@ -156,15 +187,7 @@ public class RestApiController {
 		return new ResponseEntity<DT_Appl_Info>(returnObject, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/createDTAppl/", method = RequestMethod.POST)
-	public ResponseEntity<?> createDTAppl(@RequestBody DT_Appl_Info dtApplInfo) {
-		logger.info("Creating New DT application{}", dtApplInfo);
 
-
-		Boolean returnObject=triggerService.createDesignTimeAppl(dtApplInfo);
-
-		return new ResponseEntity<Boolean>(returnObject, HttpStatus.CREATED);
-	}
 	
 	
 	@RequestMapping(value="/getListOfDTAppls/", method=RequestMethod.GET , produces = "application/json") 

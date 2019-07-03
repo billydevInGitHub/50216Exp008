@@ -102,8 +102,9 @@ public class RuntimeApplicationProcessor {
 		        		+CommonUtils.getMsgInfoArrayList(messages)+" result is:"+result);	
 			 
 			 for(CommonMsgInQueue msgInQueue:messages) {
-				socket = new Socket(Configuration.ENGINE_ADDRESS, Configuration.ENGINE_PORT);
-				
+				//socket = new Socket(Configuration.ENGINE_ADDRESS, Configuration.ENGINE_PORT);
+				 socket = new Socket(CommonConfiguration.SERVER_ADDRESS, CommonConfiguration.SERVER_LISTEN_PORT);
+				 
 //				 System.out.println("RuntimeApplicationProcessor : sending msg to engine, Msg is:"
 //			        		+CommonUtils.getMsgInfo(msgInQueue)+" result is:"+result);	
 				out = new PrintWriter(socket.getOutputStream(), true);
