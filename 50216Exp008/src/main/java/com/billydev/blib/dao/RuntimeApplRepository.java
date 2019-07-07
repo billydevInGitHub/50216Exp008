@@ -51,7 +51,10 @@ public class RuntimeApplRepository {
         			  * todo: here we hardcoded appl.generation_number, in future client
         			  * need to pass in the generation number
         			  */
-        		"select job.Job_Id, x, y, width, height, x_job_name, y_job_name, job.job_name, job.state,appl.application_name   "
+        		"select job.Job_Id, x, y, width, height, x_job_name, y_job_name, job.job_name, job.state,appl.application_name,   "
+        		+ " job.appl_generation_number, job.predecessor_names, job.predecessor_condition, job.successor_names, "
+        		+ " job.start_time, job.end_time, job.agent_name, job.script, job.arguments_of_script, job.userid, "
+        		+ " job.shell, job.return_code, job.spool_info,job.completion_code, job.description "
         		+ "from appl_diagram_rect rect, rt_appl_info appl, rt_job_info job " + 
         		"where appl.dt_application_name=rect.dt_application_name " + 
         		"      and job.job_name=rect.job_name and appl.generation_number=job.appl_generation_number  " + 
@@ -63,12 +66,25 @@ public class RuntimeApplRepository {
                     	Diagram_Rect_Info rectInfo = new Diagram_Rect_Info(); 
                     	rectInfo.setX(rs.getInt("x"));
                     	rectInfo.setY(rs.getInt("y"));
+                    	rectInfo.setApplication_name(rs.getString("application_name"));
                     	rectInfo.setWidth(rs.getInt("width"));
                     	rectInfo.setHeight(rs.getInt("height"));
                     	rectInfo.setX_job_name(rs.getInt("x_job_name"));
                     	rectInfo.setY_job_name(rs.getInt("y_job_name"));
                     	rectInfo.setJob_name(rs.getString("job_name"));
                     	rectInfo.setState(rs.getString("state"));
+                    	rectInfo.setAgent_name(rs.getString("agent_name"));
+                    	rectInfo.setAppl_generation_number(rs.getLong("appl_generation_number"));
+                    	rectInfo.setPredecessor_names(rs.getString("predecessor_names"));
+                    	rectInfo.setSuccessor_names(rs.getString("successor_names"));
+                    	rectInfo.setStart_time(rs.getTimestamp("start_time"));
+                    	rectInfo.setEnd_time(rs.getTimestamp("end_time"));
+                    	rectInfo.setScript(rs.getString("script"));
+                    	rectInfo.setArguments_of_script(rs.getString("arguments_of_script"));
+                    	rectInfo.setUserid(rs.getString("userid"));
+                    	rectInfo.setShell(rs.getString("shell"));
+                    	rectInfo.setReturn_code(rs.getString("return_code"));
+                    	rectInfo.setDescription(rs.getString("description"));                    	
                     	arrayListRect.add(rectInfo);
                     	runtimeAppInfo.setApplicationName(rs.getString("application_name"));
                     }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.billydev.blib.config.AuthenticationManagerBillyDev;
 import com.billydev.blib.config.JwtTokenUtil;
 import com.billydev.blib.model.ApiResponse;
 import com.billydev.blib.model.AuthToken;
@@ -35,7 +36,7 @@ import io.jsonwebtoken.SignatureException;
 public class AuthenticationController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManagerBillyDev authenticationManager;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;

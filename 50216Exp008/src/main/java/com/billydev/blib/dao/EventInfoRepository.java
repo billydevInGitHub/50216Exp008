@@ -186,6 +186,7 @@ public class EventInfoRepository {
                     	event_info.setEvent_name(rs.getString("event_name"));
                     	event_info.setDtappname(rs.getString("dt_application_name"));
                     	event_info.setNext_scheduled_time(rs.getTimestamp("Next_scheduled_time"));
+                    	
 
                     	arrayListEvents.add(event_info);
                     }
