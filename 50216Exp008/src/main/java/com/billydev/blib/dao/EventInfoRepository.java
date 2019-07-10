@@ -185,9 +185,12 @@ public class EventInfoRepository {
                     	Event_Info event_info =  new Event_Info();
                     	event_info.setEvent_name(rs.getString("event_name"));
                     	event_info.setDtappname(rs.getString("dt_application_name"));
-                    	event_info.setNext_scheduled_time(rs.getTimestamp("Next_scheduled_time"));
-                    	
-
+                    	event_info.setNext_scheduled_time(rs.getTimestamp("next_scheduled_time"));
+                    	event_info.setDescription(rs.getString("description"));
+                    	event_info.setEvent_create_time(rs.getTimestamp("event_create_time"));
+                    	event_info.setSchedule(rs.getString("schedule"));
+                    	event_info.setState(rs.getString("state"));
+                    	event_info.setUserParameters(rs.getString("user_parameters"));
                     	arrayListEvents.add(event_info);
                     }
         		});

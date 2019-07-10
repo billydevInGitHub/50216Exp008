@@ -8,7 +8,63 @@ public class Event_Info {
 	String dtappname; 
 	Timestamp next_scheduled_time; 
 	String eventCreatorUserId; 
+	String schedule;
+	String state;
+	String userParameters; 
+	Timestamp event_create_time;
+	String description; 
 	
+	
+	public String getSchedule() {
+		return schedule;
+	}
+
+
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
+	}
+
+
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+
+	public String getUserParameters() {
+		return userParameters;
+	}
+
+
+	public void setUserParameters(String userParameters) {
+		this.userParameters = userParameters;
+	}
+
+
+	public Timestamp getEvent_create_time() {
+		return event_create_time;
+	}
+
+
+	public void setEvent_create_time(Timestamp event_create_time) {
+		this.event_create_time = event_create_time;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	public String getDtappname() {
 		return dtappname;
 	}
